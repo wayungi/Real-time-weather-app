@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Home = () => (
-  <section>
+  <section className="container">
     <div>
       <h1>Real time Weather App</h1>
     </div>
@@ -16,6 +16,9 @@ const Home = () => (
       <p>sunny image</p>
       <p>text</p>
       <p>windspeed</p>
+    </div>
+    <div>
+      <p>search</p>
     </div>
   </section>
 );
