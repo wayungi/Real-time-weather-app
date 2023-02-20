@@ -9,6 +9,18 @@
     padding: 40px 10px;
 }
 
-.container > div {
+.container > div, header {
     text-align: center;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+.region {
+    margin-bottom:10px;
+}
+
+.region > * {
+    margin-top:5px;
 }

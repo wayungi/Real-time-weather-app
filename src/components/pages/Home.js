@@ -2,15 +2,27 @@ import React from 'react';
 
 const Home = () => (
   <section className="container">
-    <div>
+    <header>
       <h1>Real time Weather App</h1>
-    </div>
-    <div>
+    </header>
+    <div className="region">
       <h2>Africa / Kampala</h2>
       <p>local time</p>
     </div>
     <div>
-      <p>20c / 39f</p>
+      <p>
+        <span>
+          20
+          <sup>o</sup>
+          C
+        </span>
+        /
+        <span>
+          39
+          <sup>o</sup>
+          F
+        </span>
+      </p>
     </div>
     <div>
       <p>sunny image</p>
