@@ -1,8 +1,11 @@
 import './App.css';
+import Home from './components/pages/Home';
 
 function App() {
   return (
-    <main />
+    <main>
+      <Home />
+    </main>
   );
 }
 
