@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -13,6 +12,7 @@ const initialState = {
 export const fetchWeather = createAsyncThunk('weather/fetchWeather', async () => {
   const response = await axios.get(baseUrl);
   const result = response.data;
+  console.log(result);
   return result;
 });
 
@@ -22,17 +22,25 @@ export const weatherSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchWeather.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchWeather.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
-        return action.payload;
-      })
-      .addCase(fetchWeather.rejected, (state) => {
-        state.status = 'rejected';
-      });
+      .addCase(fetchWeather.pending, (state) => (
+        {
+          ...state,
+          status: 'loading',
+        }
+      ))
+      .addCase(fetchWeather.fulfilled, (state, action) => (
+        {
+          ...state,
+          status: 'fulfilled',
+          data: action.data,
+        }
+      ))
+      .addCase(fetchWeather.rejected, (state) => ({
+        ...state,
+        status: 'rejected',
+      }));
   },
 });
 
+export const queryStatus = (state) => state.status;
 export default weatherSlice.reducer;
