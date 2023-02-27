@@ -4,23 +4,24 @@
 }
 
 .container {
-    display:flex;
-    flex-direction: column;
-    padding: 40px 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 10px;
 }
 
-.container > div, header {
-    text-align: center;
+.container > div,
+header {
+  text-align: center;
 }
 
 header {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .region {
-    margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
 .region > * {
-    margin-top:5px;
+  margin-top: 5px;
 }
