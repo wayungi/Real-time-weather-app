@@ -11,9 +11,7 @@ const initialState = {
 
 export const fetchWeather = createAsyncThunk('weather/fetchWeather', async () => {
   const response = await axios.get(baseUrl);
-  const result = response.data;
-  console.log(result);
-  return result;
+  return response.data;
 });
 
 export const weatherSlice = createSlice({
@@ -32,15 +30,16 @@ export const weatherSlice = createSlice({
         {
           ...state,
           status: 'fulfilled',
-          data: action.data,
+          data: action.payload,
         }
       ))
-      .addCase(fetchWeather.rejected, (state) => ({
+      .addCase(fetchWeather.rejected, (state, action) => ({
         ...state,
+        error: action.error.message,
         status: 'rejected',
       }));
   },
 });
 
-export const queryStatus = (state) => state.status;
+export const queryStatus = (state) => state.weather.status;
 export default weatherSlice.reducer;
