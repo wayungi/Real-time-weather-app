@@ -18,30 +18,61 @@ const Home = () => {
     ...weatherData.current,
   };
 
-  console.log(data);
-
   const formattedWeatherData = (
     <article>
       <div className="region">
         <h2>{data.tz_id}</h2>
+        <h3>{data.country}</h3>
       </div>
       <div>
-        <span>
-          {data.feelslike_c}
-          <sup>o</sup>
-          C
-        </span>
-        /
-        <span>
-          {data.feelslike_f}
-          <sup>o</sup>
-          F
-        </span>
+        <div>
+          Temperature
+          <span>
+            {data.feelslike_c}
+            <sup>o</sup>
+            C
+          </span>
+          /
+          <span>
+            {data.feelslike_f}
+            <sup>o</sup>
+            F
+          </span>
+        </div>
+        <p>
+          Humidity
+          {' '}
+          <span>{data.humidity}</span>
+        </p>
+        <p>
+          Wind speed
+          {' '}
+          <span>{data.wind_kph}</span>
+          kph
+          {' '}
+          /
+          <span>{data.wind_mph}</span>
+          mph
+        </p>
+        <p>
+          Wind direction
+          {' '}
+          <span>{data.wind_dir}</span>
+        </p>
+        <p>
+          Pressure
+          {' '}
+          <span>{data.pressure_in}</span>
+          in /
+          <span>{data.pressure_mb}</span>
+          mb
+        </p>
       </div>
       <div>
         <div>
           <img src={`https:${data?.condition?.icon}`} alt="weather" />
         </div>
+        <p>{data?.condition?.text}</p>
       </div>
     </article>
   );
@@ -52,35 +83,6 @@ const Home = () => {
         <h1>Real time Weather App</h1>
       </header>
       {formattedWeatherData}
-      {/* <div>
-        <div className="region">
-          <h2>{items}</h2>
-          <p>local time</p>
-        </div>
-        <div>
-          <p>
-            <span>
-              20
-              <sup>o</sup>
-              C
-            </span>
-            /
-            <span>
-              39
-              <sup>o</sup>
-              F
-            </span>
-          </p>
-        </div>
-        <div>
-          <p>sunny image</p>
-          <p>text</p>
-          <p>windspeed</p>
-        </div>
-        <div>
-          <p>search</p>
-        </div>
-      </div> */}
     </section>
   );
 };
