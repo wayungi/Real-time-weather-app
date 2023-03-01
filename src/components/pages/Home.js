@@ -1,8 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchWeather, queryStatus,canSearch } from '../reducers/weatherSlice';
+import { fetchWeather, queryStatus, canSearch } from '../reducers/weatherSlice';
 import Search from '../partials/Search';
 
 const Home = () => {
