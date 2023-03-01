@@ -1,29 +1,47 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchWeather, queryStatus } from '../reducers/weatherSlice';
+import { fetchWeather } from '../reducers/weatherSlice';
+// import Search from '../partials/Search';
 
 const Home = () => {
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weather.data);
-  const queryState = useSelector(queryStatus);
 
   useEffect(() => {
-    if (queryState === 'idle') {
-      dispatch(fetchWeather());
-    }
-  }, [dispatch, queryState]);
+    dispatch(fetchWeather('Kigali'));
+  }, [dispatch]);
 
   const data = {
     ...weatherData.location,
     ...weatherData.current,
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(fetchWeather(e.target.search.value));
+  };
+
   const formattedWeatherData = (
     <article>
       <div className="region">
-        <h2>{data.tz_id}</h2>
-        <h3>{data.country}</h3>
+        <h2>
+          {data.tz_id?.split('/')[0]}
+          {' '}
+          /
+          {' '}
+          {data.country}
+        </h2>
+        <h3>{data.name}</h3>
       </div>
+
+      <div>
+        <div>
+          <img src={`https:${data?.condition?.icon}`} alt="weather" />
+        </div>
+        <p>{data?.condition?.text}</p>
+      </div>
+
       <div>
         <div>
           Temperature
@@ -39,11 +57,6 @@ const Home = () => {
             F
           </span>
         </div>
-        <p>
-          Humidity
-          {' '}
-          <span>{data.humidity}</span>
-        </p>
         <p>
           Wind speed
           {' '}
@@ -68,21 +81,18 @@ const Home = () => {
           mb
         </p>
       </div>
-      <div>
-        <div>
-          <img src={`https:${data?.condition?.icon}`} alt="weather" />
-        </div>
-        <p>{data?.condition?.text}</p>
-      </div>
+
     </article>
   );
 
   return (
     <section className="container">
-      <header>
-        <h1>Real time Weather App</h1>
-      </header>
-      {formattedWeatherData}
+      <div>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <input type="text" className="search-field" name="search" placeholder="Enter location" />
+        </form>
+      </div>
+      {formattedWeatherData }
     </section>
   );
 };
