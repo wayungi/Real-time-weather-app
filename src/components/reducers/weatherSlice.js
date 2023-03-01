@@ -7,7 +7,7 @@ const initialState = {
   status: 'idle',
   data: {},
   error: null,
-  displaySearch: false,
+  // displaySearch: false,
 };
 
 export const fetchWeather = createAsyncThunk('weather/fetchWeather', async () => {
@@ -18,12 +18,12 @@ export const fetchWeather = createAsyncThunk('weather/fetchWeather', async () =>
 export const weatherSlice = createSlice({
   name: 'weather',
   initialState,
-  reducers: {
-    toggleDisplaySearch: (state) => ({
-      ...state,
-      displaySearch: !state.displaySearch,
-    }),
-  },
+  // reducers: {
+  //   toggleDisplaySearch: (state) => ({
+  //     ...state,
+  //     displaySearch: !state.displaySearch,
+  //   }),
+  // },
   extraReducers: (builder) => {
     builder
       .addCase(fetchWeather.pending, (state) => (
@@ -47,7 +47,7 @@ export const weatherSlice = createSlice({
   },
 });
 
-export const { toggleDisplaySearch } = weatherSlice.actions;
+// export const { toggleDisplaySearch } = weatherSlice.actions;
 export const queryStatus = (state) => state.weather.status;
-export const canSearch = (state) => state.weather.displaySearch;
+// export const canSearch = (state) => state.weather.displaySearch;
 export default weatherSlice.reducer;

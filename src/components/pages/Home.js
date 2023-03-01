@@ -2,16 +2,14 @@
 import React, { useEffect } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  fetchWeather, queryStatus, canSearch, toggleDisplaySearch,
-} from '../reducers/weatherSlice';
-import Search from '../partials/Search';
+import { fetchWeather, queryStatus } from '../reducers/weatherSlice';
+// import Search from '../partials/Search';
 
 const Home = () => {
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weather.data);
   const queryState = useSelector(queryStatus);
-  const displaySearch = useSelector(canSearch);
+  // const displaySearch = useSelector(canSearch);
 
   useEffect(() => {
     if (queryState === 'idle') {
@@ -90,9 +88,9 @@ const Home = () => {
   return (
     <section className="container">
       <div>
-        {displaySearch ? '' : <BsSearch onClick={() => dispatch(toggleDisplaySearch())} />}
+        <BsSearch />
       </div>
-      { displaySearch ? <Search /> : formattedWeatherData }
+      {formattedWeatherData }
     </section>
   );
 };
