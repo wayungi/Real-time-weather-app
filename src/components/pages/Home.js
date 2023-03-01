@@ -18,12 +18,27 @@ const Home = () => {
     ...weatherData.current,
   };
 
+  // console.log(data);
   const formattedWeatherData = (
     <article>
       <div className="region">
-        <h2>{data.tz_id}</h2>
-        <h3>{data.country}</h3>
+        <h2>
+          {data.tz_id?.split('/')[0]}
+          {' '}
+          /
+          {' '}
+          {data.country}
+        </h2>
+        <h3>{data.name}</h3>
       </div>
+
+      <div>
+        <div>
+          <img src={`https:${data?.condition?.icon}`} alt="weather" />
+        </div>
+        <p>{data?.condition?.text}</p>
+      </div>
+
       <div>
         <div>
           Temperature
@@ -39,11 +54,6 @@ const Home = () => {
             F
           </span>
         </div>
-        <p>
-          Humidity
-          {' '}
-          <span>{data.humidity}</span>
-        </p>
         <p>
           Wind speed
           {' '}
@@ -68,20 +78,12 @@ const Home = () => {
           mb
         </p>
       </div>
-      <div>
-        <div>
-          <img src={`https:${data?.condition?.icon}`} alt="weather" />
-        </div>
-        <p>{data?.condition?.text}</p>
-      </div>
+
     </article>
   );
 
   return (
     <section className="container">
-      <header>
-        <h1>Real time Weather App</h1>
-      </header>
       {formattedWeatherData}
     </section>
   );
