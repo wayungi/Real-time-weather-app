@@ -7,6 +7,7 @@ const initialState = {
   status: 'idle',
   data: {},
   error: null,
+  search: false,
 };
 
 export const fetchWeather = createAsyncThunk('weather/fetchWeather', async () => {
@@ -42,4 +43,5 @@ export const weatherSlice = createSlice({
 });
 
 export const queryStatus = (state) => state.weather.status;
+export const canSearch = (state) => state.weather.search;
 export default weatherSlice.reducer;
