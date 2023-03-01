@@ -2,28 +2,22 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 // https://www.weatherapi.com/
-const baseUrl = 'https://api.weatherapi.com/v1/current.json?key=81c94cbab5f34936b61145833232002&q=kampala&aqi=yes';
 const initialState = {
   status: 'idle',
   data: {},
   error: null,
-  // displaySearch: false,
 };
 
-export const fetchWeather = createAsyncThunk('weather/fetchWeather', async () => {
-  const response = await axios.get(baseUrl);
+export const fetchWeather = createAsyncThunk('weather/fetchWeather', async (location) => {
+  // console.log(location);
+  const response = await axios.get(`https://api.weatherapi.com/v1/current.json?key=81c94cbab5f34936b61145833232002&q=${location}&aqi=yes`);
   return response.data;
 });
 
 export const weatherSlice = createSlice({
   name: 'weather',
   initialState,
-  // reducers: {
-  //   toggleDisplaySearch: (state) => ({
-  //     ...state,
-  //     displaySearch: !state.displaySearch,
-  //   }),
-  // },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchWeather.pending, (state) => (
@@ -46,8 +40,6 @@ export const weatherSlice = createSlice({
       }));
   },
 });
-
-// export const { toggleDisplaySearch } = weatherSlice.actions;
 export const queryStatus = (state) => state.weather.status;
-// export const canSearch = (state) => state.weather.displaySearch;
+export const location = (state) => state.weather.location;
 export default weatherSlice.reducer;

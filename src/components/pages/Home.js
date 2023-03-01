@@ -1,20 +1,16 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchWeather, queryStatus } from '../reducers/weatherSlice';
+import { fetchWeather } from '../reducers/weatherSlice';
 // import Search from '../partials/Search';
 
 const Home = () => {
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weather.data);
-  const queryState = useSelector(queryStatus);
-  // const displaySearch = useSelector(canSearch);
-  const [location, setLocation] = useState('kampala');
+
   useEffect(() => {
-    if (queryState === 'idle') {
-      dispatch(fetchWeather());
-    }
-  }, [dispatch, queryState]);
+    dispatch(fetchWeather('Kigali'));
+  }, [dispatch]);
 
   const data = {
     ...weatherData.location,
@@ -23,10 +19,8 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLocation(e.target.search.value);
+    dispatch(fetchWeather(e.target.search.value));
   };
-
-  console.log(location);
 
   const formattedWeatherData = (
     <article>
