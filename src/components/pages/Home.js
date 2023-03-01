@@ -2,7 +2,9 @@
 import React, { useEffect } from 'react';
 import { BsSearch } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchWeather, queryStatus, canSearch } from '../reducers/weatherSlice';
+import {
+  fetchWeather, queryStatus, canSearch, toggleDisplaySearch,
+} from '../reducers/weatherSlice';
 import Search from '../partials/Search';
 
 const Home = () => {
@@ -20,10 +22,6 @@ const Home = () => {
   const data = {
     ...weatherData.location,
     ...weatherData.current,
-  };
-
-  const search = () => {
-    setDisplaySearch(!displaySearch);
   };
 
   const formattedWeatherData = (
@@ -92,7 +90,7 @@ const Home = () => {
   return (
     <section className="container">
       <div>
-        {displaySearch ? '' : <BsSearch onClick={search} />}
+        {displaySearch ? '' : <BsSearch onClick={() => dispatch(toggleDisplaySearch())} />}
       </div>
       { displaySearch ? <Search /> : formattedWeatherData }
     </section>

@@ -47,6 +47,7 @@ export const weatherSlice = createSlice({
   },
 });
 
+export const { toggleDisplaySearch } = weatherSlice.actions;
 export const queryStatus = (state) => state.weather.status;
 export const canSearch = (state) => state.weather.displaySearch;
 export default weatherSlice.reducer;
