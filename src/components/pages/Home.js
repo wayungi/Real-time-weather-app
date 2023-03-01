@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsSearch } from 'react-icons/bs';
+import Modal from 'react-overlays/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWeather, queryStatus } from '../reducers/weatherSlice';
 // import Search from '../partials/Search';
@@ -10,6 +11,7 @@ const Home = () => {
   const weatherData = useSelector((state) => state.weather.data);
   const queryState = useSelector(queryStatus);
   // const displaySearch = useSelector(canSearch);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (queryState === 'idle') {
@@ -22,77 +24,99 @@ const Home = () => {
     ...weatherData.current,
   };
 
-  const formattedWeatherData = (
-    <article>
-      <div className="region">
-        <h2>
-          {data.tz_id?.split('/')[0]}
-          {' '}
-          /
-          {' '}
-          {data.country}
-        </h2>
-        <h3>{data.name}</h3>
-      </div>
+  const handleClose = () => setShowModal(false);
 
+  const handleSave = () => {
+    console.log('success');
+  };
+
+  const renderBackdrop = () => <div className="backdrop" />;
+
+    <Modal
+      className="modal"
+      show={showModal}
+      onHide={handleClose}
+      renderBackdrop={renderBackdrop}
+    >
       <div>
-        <div>
-          <img src={`https:${data?.condition?.icon}`} alt="weather" />
+        <form>
+          <input type="search" name="location" placeholder="Search" />
+          <input type="submit" value="Search" onClick={handleSave} />
+        </form>
+      </div>
+    </Modal>;
+
+    const formattedWeatherData = (
+      <article>
+        <div className="region">
+          <h2>
+            {data.tz_id?.split('/')[0]}
+            {' '}
+            /
+            {' '}
+            {data.country}
+          </h2>
+          <h3>{data.name}</h3>
         </div>
-        <p>{data?.condition?.text}</p>
-      </div>
 
-      <div>
         <div>
-          Temperature
-          <span>
-            {data.feelslike_c}
-            <sup>o</sup>
-            C
-          </span>
-          /
-          <span>
-            {data.feelslike_f}
-            <sup>o</sup>
-            F
-          </span>
+          <div>
+            <img src={`https:${data?.condition?.icon}`} alt="weather" />
+          </div>
+          <p>{data?.condition?.text}</p>
         </div>
-        <p>
-          Wind speed
-          {' '}
-          <span>{data.wind_kph}</span>
-          kph
-          {' '}
-          /
-          <span>{data.wind_mph}</span>
-          mph
-        </p>
-        <p>
-          Wind direction
-          {' '}
-          <span>{data.wind_dir}</span>
-        </p>
-        <p>
-          Pressure
-          {' '}
-          <span>{data.pressure_in}</span>
-          in /
-          <span>{data.pressure_mb}</span>
-          mb
-        </p>
-      </div>
 
-    </article>
-  );
+        <div>
+          <div>
+            Temperature
+            <span>
+              {data.feelslike_c}
+              <sup>o</sup>
+              C
+            </span>
+            /
+            <span>
+              {data.feelslike_f}
+              <sup>o</sup>
+              F
+            </span>
+          </div>
+          <p>
+            Wind speed
+            {' '}
+            <span>{data.wind_kph}</span>
+            kph
+            {' '}
+            /
+            <span>{data.wind_mph}</span>
+            mph
+          </p>
+          <p>
+            Wind direction
+            {' '}
+            <span>{data.wind_dir}</span>
+          </p>
+          <p>
+            Pressure
+            {' '}
+            <span>{data.pressure_in}</span>
+            in /
+            <span>{data.pressure_mb}</span>
+            mb
+          </p>
+        </div>
 
-  return (
-    <section className="container">
-      <div>
-        <BsSearch />
-      </div>
-      {formattedWeatherData }
-    </section>
-  );
+      </article>
+    );
+
+    return (
+      <section className="container">
+        <div>
+          <BsSearch onClick={() => setShowModal(true)} />
+        </div>
+        {formattedWeatherData }
+      </section>
+    );
 };
 
 export default Home;
