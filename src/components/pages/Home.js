@@ -25,7 +25,7 @@ const Home = () => {
   const formattedWeatherData = (
     <article>
       <div className="region">
-        <h2>
+        <h2 className="text-blue-500">
           {data.tz_id?.split('/')[0]}
           {' '}
           /
@@ -86,7 +86,7 @@ const Home = () => {
   );
 
   return (
-    <section className="container">
+    <section>
       <div>
         <form onSubmit={(e) => handleSubmit(e)}>
           <input type="text" className="search-field" name="search" placeholder="Enter location" />
