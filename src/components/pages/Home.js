@@ -20,7 +20,7 @@ const Home = () => {
   };
 
   const formattedWeatherData = (
-    <article>
+    <article className="flex flex-col items-center">
       <div className="region">
         <h2 className="text-blue-500">
           {data.tz_id?.split('/')[0]}
