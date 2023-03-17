@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWeather } from '../reducers/weatherSlice';
 // import Search from '../partials/Search';
@@ -7,19 +7,16 @@ import { fetchWeather } from '../reducers/weatherSlice';
 const Home = () => {
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weather.data);
+  const [location, setLocation] = useState(null);
+  const search = location ?? 'Kigali';
 
   useEffect(() => {
-    dispatch(fetchWeather('Kigali'));
+    dispatch(fetchWeather(search));
   }, [dispatch]);
 
   const data = {
     ...weatherData.location,
     ...weatherData.current,
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(fetchWeather(e.target.search.value));
   };
 
   const formattedWeatherData = (
@@ -85,11 +82,23 @@ const Home = () => {
     </article>
   );
 
+  const handleChange = (event) => {
+    setLocation(event.target.value);
+    dispatch(fetchWeather(event.target.value));
+  };
+
   return (
     <section>
       <div>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <input type="text" className="search-field" name="search" placeholder="Enter location" />
+        <form className="">
+          <input
+            type="text"
+            className="search-field"
+            name="search"
+            placeholder="Enter location"
+            onChange={(e) => handleChange(e)}
+            value={location}
+          />
         </form>
       </div>
       {formattedWeatherData }
