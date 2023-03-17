@@ -90,10 +90,10 @@ const Home = () => {
   return (
     <section>
       <div>
-        <form className="">
+        <form className="flex justify-center w-full">
           <input
             type="text"
-            className="search-field"
+            className="w-[95%] py-2 px-3 rounded focus:outline-none"
             name="search"
             placeholder="Enter location"
             onChange={(e) => handleChange(e)}
