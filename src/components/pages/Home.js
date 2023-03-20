@@ -41,36 +41,32 @@ const Home = () => {
         <p className="text-center">{data?.condition?.text}</p>
       </div>
 
-      <div className="text-center relative">
+      <div className="text-center relative mb-5">
         <span className="text-6xl">{data.feelslike_c}</span>
         {/* {data.feelslike_c} */}
         <sup className="absolute top-2">o</sup>
       </div>
 
-      <section className="flex">
-        <span>
-          {/* Wind speed */}
+      <section className="flex gap-2 w-[90%] mx-1">
+        <div className="text-center py-2 flex-1 rounded-md bg-[rgb(150,247,247)]">
+          <h4 className="text-sm  mb-8 font-bold">Wind speed</h4>
+          <span className="text-2xl">
+            {data.wind_kph}
+            {/* {data.wind_mph} */}
+          </span>
+        </div>
+        <div className="text-center py-2 flex-1 rounded-md bg-[rgb(150,247,247)]">
+          <h4 className="text-sm mb-8 font-bold">Wind direction</h4>
+          <span className="text-2xl">{data.wind_dir}</span>
+        </div>
+        <div className="text-center py-2 flex-1 rounded-md bg-[rgb(150,247,247)]">
+          <h4 className="text-sm  mb-8 font-bold">Pressure</h4>
           {' '}
-          <span>{data.wind_kph}</span>
-          {/* kph
-          {' '}
-          /
-          <span>{data.wind_mph}</span>
-          mph */}
-        </span>
-        <span>
-          {/* Wind direction */}
-          {' '}
-          <span>{data.wind_dir}</span>
-        </span>
-        <span>
-          {/* Pressure */}
-          {' '}
-          <span>{data.pressure_in}</span>
+          <span className="text-2xl">{data.pressure_in}</span>
           {/* in /
           <span>{data.pressure_mb}</span>
           mb */}
-        </span>
+        </div>
       </section>
 
     </article>
