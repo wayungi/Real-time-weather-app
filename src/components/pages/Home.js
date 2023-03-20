@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { AiFillSetting } from 'react-icons/ai';
 import { fetchWeather } from '../reducers/weatherSlice';
 
 const Home = () => {
@@ -78,7 +79,9 @@ const Home = () => {
     <section>
       <div>
         <h1>Real time weather App</h1>
-        <div></div>
+        <div>
+          <AiFillSetting />
+        </div>
       </div>
       <div>
         <form className="flex justify-center w-full mb-5">
