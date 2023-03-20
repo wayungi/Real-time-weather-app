@@ -9,9 +9,6 @@ const Home = () => {
   const [location, setLocation] = useState(null);
   const search = location ?? 'Kigali';
 
-  // ===
-  // setScale(scale);
-
   useEffect(() => {
     dispatch(fetchWeather(search));
   }, [dispatch]);
@@ -79,6 +76,10 @@ const Home = () => {
 
   return (
     <section>
+      <div>
+        <h1>Real time weather App</h1>
+        <div></div>
+      </div>
       <div>
         <form className="flex justify-center w-full mb-5">
           <input
