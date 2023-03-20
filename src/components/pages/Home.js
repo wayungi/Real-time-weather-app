@@ -2,13 +2,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWeather } from '../reducers/weatherSlice';
-// import Search from '../partials/Search';
 
 const Home = () => {
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weather.data);
   const [location, setLocation] = useState(null);
   const search = location ?? 'Kigali';
+
+  // ===
+  // setScale(scale);
 
   useEffect(() => {
     dispatch(fetchWeather(search));
@@ -21,63 +23,55 @@ const Home = () => {
 
   const formattedWeatherData = (
     <article className="flex flex-col items-center">
-      <div className="region">
-        <h2 className="text-blue-500">
-          {data.tz_id?.split('/')[0]}
+      <div>
+        <h2 className="font-rubik-font font-[600] mb-2">
+          <span className="text-xl">{data.tz_id?.split('/')[0]}</span>
           {' '}
           /
           {' '}
           {data.country}
         </h2>
-        <h3>{data.name}</h3>
+        <h3 className="text-center">{data.name}</h3>
       </div>
 
-      <div>
+      <div className="my-2 rounded pt-1 pb-4 py-3">
         <div>
-          <img src={`https:${data?.condition?.icon}`} alt="weather" />
+          <img className="w-32" src={`https:${data?.condition?.icon}`} alt="weather" />
         </div>
-        <p>{data?.condition?.text}</p>
+        <p className="text-center">{data?.condition?.text}</p>
       </div>
 
-      <div>
-        <div>
-          Temperature
-          <span>
-            {data.feelslike_c}
-            <sup>o</sup>
-            C
-          </span>
-          /
-          <span>
-            {data.feelslike_f}
-            <sup>o</sup>
-            F
-          </span>
-        </div>
-        <p>
-          Wind speed
+      <div className="text-center relative">
+        <span className="text-6xl">{data.feelslike_c}</span>
+        {/* {data.feelslike_c} */}
+        <sup className="absolute top-2">o</sup>
+      </div>
+
+      <section className="flex">
+        <span>
+          {/* Wind speed */}
           {' '}
           <span>{data.wind_kph}</span>
-          kph
+          {/* kph
           {' '}
           /
           <span>{data.wind_mph}</span>
-          mph
-        </p>
-        <p>
-          Wind direction
+          mph */}
+        </span>
+        <span>
+          {/* Wind direction */}
           {' '}
           <span>{data.wind_dir}</span>
-        </p>
-        <p>
-          Pressure
+        </span>
+        <span>
+          {/* Pressure */}
           {' '}
           <span>{data.pressure_in}</span>
-          in /
+          {/* in /
           <span>{data.pressure_mb}</span>
-          mb
-        </p>
-      </div>
+          mb */}
+        </span>
+      </section>
 
     </article>
   );
@@ -90,7 +84,7 @@ const Home = () => {
   return (
     <section>
       <div>
-        <form className="flex justify-center w-full">
+        <form className="flex justify-center w-full mb-5">
           <input
             type="text"
             className="w-[95%] py-2 px-3 rounded focus:outline-none"
