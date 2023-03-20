@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchWeather(search));
-  }, [dispatch]);
+  }, [dispatch, search]);
 
   const data = {
     ...weatherData.location,
