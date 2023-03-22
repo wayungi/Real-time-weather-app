@@ -65,15 +65,28 @@ const SettingsPage = () => (
       </div>
 
       <div className="mb-5">
-        <p>Temperature</p>
-        <label htmlFor="temperature">
+        <p className="mb-2">Temperature</p>
+        <label htmlFor="temperature" className="pl-3">
           Celcius
-          <input type="radio" id="temperature" name="temperature" value="celcius" />
+          <input
+            type="radio"
+            id="temperature"
+            name="temperature"
+            value="celcius"
+            className="mr-7 ml-2"
+            checked
+          />
         </label>
 
-        <label htmlFor="wind_speed">
+        <label htmlFor="wind_speed" className="pl-3">
           Fahrenheit
-          <input type="radio" id="temperature" name="temperature" value="in" />
+          <input
+            type="radio"
+            id="temperature"
+            name="temperature"
+            value="in"
+            className="ml-2"
+          />
         </label>
       </div>
     </section>
