@@ -79,11 +79,10 @@ const Home = () => {
 
   const settings = () => {
     setShowSettings((prevState) => !prevState);
-    console.log(showSettings);
   };
 
   return (
-    <section>
+    <section className="relative py-10 max-h-screen">
       <div>
         <h1>Real time weather App</h1>
         <div>
