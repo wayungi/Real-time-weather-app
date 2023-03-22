@@ -39,15 +39,28 @@ const SettingsPage = () => (
       </div>
 
       <div className="mb-5">
-        <p>Pressure</p>
-        <label htmlFor="pressure">
+        <p className="mb-2">Pressure</p>
+        <label htmlFor="pressure" className="pl-3">
           millibars
-          <input type="radio" id="pressure" name="air_pressure" value="mb" />
+          <input
+            type="radio"
+            id="pressure"
+            name="air_pressure"
+            value="mb"
+            className="mr-7 ml-2"
+            checked
+          />
         </label>
 
-        <label htmlFor="wind_speed">
+        <label htmlFor="wind_speed" className="pl-3">
           pascal
-          <input type="radio" id="pressure" name="air_pressure" value="in" />
+          <input
+            type="radio"
+            id="pressure"
+            name="air_pressure"
+            value="in"
+            className="ml-2"
+          />
         </label>
       </div>
 
