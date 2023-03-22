@@ -99,5 +99,4 @@ const SettingsPage = () => (
     </section>
   </form>
 );
-
 export default SettingsPage;
