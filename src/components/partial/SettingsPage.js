@@ -1,6 +1,6 @@
 import React from 'react';
 
-const settingsPage = () => (
+const SettingsPage = () => (
   <form>
     <div>
       <input type="text" placeholder="Enter default location" name="location" />
@@ -46,4 +46,4 @@ const settingsPage = () => (
   </form>
 );
 
-export default settingsPage;
+export default SettingsPage;

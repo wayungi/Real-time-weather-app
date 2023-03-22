@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiFillSetting } from 'react-icons/ai';
 import { fetchWeather } from '../reducers/weatherSlice';
+import SettingsPage from '../partial/SettingsPage';
 
 const Home = () => {
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weather.data);
   const [location, setLocation] = useState(null);
   const search = location ?? 'Kigali';
+  const [showSettings, setShowSettings] = useState(false);
 
   useEffect(() => {
     dispatch(fetchWeather(search));
@@ -75,12 +77,17 @@ const Home = () => {
     dispatch(fetchWeather(event.target.value));
   };
 
+  const settings = () => {
+    setShowSettings((prevState) => !prevState);
+    console.log(showSettings);
+  };
+
   return (
     <section>
       <div>
         <h1>Real time weather App</h1>
         <div>
-          <AiFillSetting />
+          <AiFillSetting onClick={settings} />
         </div>
       </div>
       <div>
@@ -96,6 +103,7 @@ const Home = () => {
         </form>
       </div>
       {formattedWeatherData }
+      {showSettings ? <SettingsPage /> : null }
     </section>
   );
 };
