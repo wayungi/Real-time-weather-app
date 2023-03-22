@@ -1,7 +1,14 @@
 import React from 'react';
+import { AiFillCloseCircle } from 'react-icons/ai';
 
 const SettingsPage = () => (
-  <form className="absolute inset-0 bg-orange-300 ">
+  <form className="absolute inset-0 bg-[rgba(45,212,191,.5)] pt-7">
+    <div className=" flex justify-end pr-7">
+      <AiFillCloseCircle size="2em" />
+    </div>
+
+    <h1 className="text-center font-bold text-xl">Select your preffered units</h1>
+
     <section className="m-7 rounded p-5 bg-teal-400">
       <div className="mb-5">
         <input
