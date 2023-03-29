@@ -4,12 +4,21 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 const SettingsPage = () => {
   const windSpeedUnit = JSON.parse(localStorage.getItem('windSpeedUnit'));
   const windPressureUnit = JSON.parse(localStorage.getItem('windPressureUnit'));
+  const windTemperatureUnit = JSON.parse(localStorage.getItem('windTemperatureUnit'));
 
   const currentSpeedUnit = windSpeedUnit || 'kph';
   const currentWindPressureUnit = windPressureUnit || 'mb';
+  const currentTemperatureUnit = windTemperatureUnit || 'celcius';
 
   const [speedUnit, setSpeedUnit] = useState(currentSpeedUnit);
   const [pressureUnit, setPressureUnit] = useState(currentWindPressureUnit);
+  const [temperatureUnit, setTemperatureUnit] = useState(currentTemperatureUnit);
+
+  const isTemperatureUnitSelected = (radioUnit) => (temperatureUnit === radioUnit);
+  const handleTemperatureClicked = (radioUnit) => {
+    setTemperatureUnit(radioUnit);
+    localStorage.setItem('windTemperatureUnit', JSON.stringify(radioUnit));
+  };
 
   const isPressureUnitSelected = (radioUnit) => (pressureUnit === radioUnit);
   const handlePressureClicked = (radioUnit) => {
@@ -109,7 +118,8 @@ const SettingsPage = () => {
               name="temperature"
               value="celcius"
               className="mr-7 ml-2"
-              // checked
+              checked={isTemperatureUnitSelected('celcius')}
+              onChange={() => handleTemperatureClicked('celcius')}
             />
           </label>
 
@@ -121,6 +131,8 @@ const SettingsPage = () => {
               name="temperature"
               value="in"
               className="ml-2"
+              checked={isTemperatureUnitSelected('farenheit')}
+              onChange={() => handleTemperatureClicked('farenheit')}
             />
           </label>
         </div>
