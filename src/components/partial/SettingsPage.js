@@ -3,11 +3,18 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 
 const SettingsPage = () => {
   // true if kph, false if mph
-  const [speedUnit, setSpeedUnit] = useState('kph');
+
+  const windSpeedUnit = JSON.parse(localStorage.getItem('windSpeedUnit'));
+  const currentSpeedUnit = windSpeedUnit || 'kph';
+
+  const [speedUnit, setSpeedUnit] = useState(currentSpeedUnit);
 
   const isRadioSelected = (radioUnit) => (speedUnit === radioUnit);
 
-  const handleRadioClicked = (radioUnit) => setSpeedUnit(radioUnit);
+  const handleRadioClicked = (radioUnit) => {
+    setSpeedUnit(radioUnit);
+    localStorage.setItem('windSpeedUnit', JSON.stringify(radioUnit));
+  };
 
   return (
     <form className="absolute inset-0 bg-[rgba(45,212,191,.5)] pt-7">
@@ -66,7 +73,7 @@ const SettingsPage = () => {
               name="air_pressure"
               value="mb"
               className="mr-7 ml-2"
-              checked
+              // checked
             />
           </label>
 
@@ -92,7 +99,7 @@ const SettingsPage = () => {
               name="temperature"
               value="celcius"
               className="mr-7 ml-2"
-              checked
+              // checked
             />
           </label>
 
