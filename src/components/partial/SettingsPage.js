@@ -2,13 +2,9 @@ import React, { useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 const SettingsPage = () => {
-  const windSpeedUnit = JSON.parse(localStorage.getItem('windSpeedUnit'));
-  const windPressureUnit = JSON.parse(localStorage.getItem('windPressureUnit'));
-  const windTemperatureUnit = JSON.parse(localStorage.getItem('windTemperatureUnit'));
-
-  const currentSpeedUnit = windSpeedUnit || 'kph';
-  const currentWindPressureUnit = windPressureUnit || 'mb';
-  const currentTemperatureUnit = windTemperatureUnit || 'celcius';
+  const currentSpeedUnit = JSON.parse(localStorage.getItem('speedUnit')) || 'kph';
+  const currentWindPressureUnit = JSON.parse(localStorage.getItem('pressureUnit')) || 'mb';
+  const currentTemperatureUnit = JSON.parse(localStorage.getItem('temperatureUnit')) || 'celcius';
 
   const [speedUnit, setSpeedUnit] = useState(currentSpeedUnit);
   const [pressureUnit, setPressureUnit] = useState(currentWindPressureUnit);
@@ -17,19 +13,19 @@ const SettingsPage = () => {
   const isTemperatureUnitSelected = (radioUnit) => (temperatureUnit === radioUnit);
   const handleTemperatureClicked = (radioUnit) => {
     setTemperatureUnit(radioUnit);
-    localStorage.setItem('windTemperatureUnit', JSON.stringify(radioUnit));
+    localStorage.setItem('temperatureUnit', JSON.stringify(radioUnit));
   };
 
   const isPressureUnitSelected = (radioUnit) => (pressureUnit === radioUnit);
   const handlePressureClicked = (radioUnit) => {
     setPressureUnit(radioUnit);
-    localStorage.setItem('windPressureUnit', JSON.stringify(radioUnit));
+    localStorage.setItem('pressureUnit', JSON.stringify(radioUnit));
   };
 
   const isRadioSelected = (radioUnit) => (speedUnit === radioUnit);
   const handleRadioClicked = (radioUnit) => {
     setSpeedUnit(radioUnit);
-    localStorage.setItem('windSpeedUnit', JSON.stringify(radioUnit));
+    localStorage.setItem('speedUnit', JSON.stringify(radioUnit));
   };
 
   return (
