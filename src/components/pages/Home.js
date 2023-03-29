@@ -8,7 +8,8 @@ import SettingsPage from '../partial/SettingsPage';
 const Home = () => {
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weather.data);
-  const [location, setLocation] = useState(null);
+  // ! add kigali here for location to prevent linter errorrs
+  const [location, setLocation] = useState('Kigali');
   const search = location ?? 'Kigali';
   const [showSettings, setShowSettings] = useState(false);
 
