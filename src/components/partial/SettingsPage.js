@@ -2,15 +2,22 @@ import React, { useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 
 const SettingsPage = () => {
-  // true if kph, false if mph
-
   const windSpeedUnit = JSON.parse(localStorage.getItem('windSpeedUnit'));
+  const windPressureUnit = JSON.parse(localStorage.getItem('windPressureUnit'));
+
   const currentSpeedUnit = windSpeedUnit || 'kph';
+  const currentWindPressureUnit = windPressureUnit || 'mb';
 
   const [speedUnit, setSpeedUnit] = useState(currentSpeedUnit);
+  const [pressureUnit, setPressureUnit] = useState(currentWindPressureUnit);
+
+  const isPressureUnitSelected = (radioUnit) => (pressureUnit === radioUnit);
+  const handlePressureClicked = (radioUnit) => {
+    setPressureUnit(radioUnit);
+    localStorage.setItem('windPressureUnit', JSON.stringify(radioUnit));
+  };
 
   const isRadioSelected = (radioUnit) => (speedUnit === radioUnit);
-
   const handleRadioClicked = (radioUnit) => {
     setSpeedUnit(radioUnit);
     localStorage.setItem('windSpeedUnit', JSON.stringify(radioUnit));
@@ -73,7 +80,8 @@ const SettingsPage = () => {
               name="air_pressure"
               value="mb"
               className="mr-7 ml-2"
-              // checked
+              checked={isPressureUnitSelected('mb')}
+              onChange={() => handlePressureClicked('mb')}
             />
           </label>
 
@@ -85,6 +93,8 @@ const SettingsPage = () => {
               name="air_pressure"
               value="in"
               className="ml-2"
+              checked={isPressureUnitSelected('in')}
+              onChange={() => handlePressureClicked('in')}
             />
           </label>
         </div>
